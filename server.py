@@ -225,7 +225,7 @@ def act(utr,a):
 class H(SimpleHTTPRequestHandler):
     def log_message(self,*a):pass
     def end_headers(self):
-        self.send_header('Access-Control-Allow-Origin', '*');self.send_header('Access-Control-Allow-Headers', 'Authorization, Content-Type');self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');self.send_header('Access-Control-Allow-Origin', '*');self.send_header('Access-Control-Allow-Headers', 'Authorization, Content-Type');self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');self.send_header('Cache-Control','no-cache');self.send_header('X-Content-Type-Options','nosniff');self.send_header('Referrer-Policy','no-referrer');super().end_headers()
+        self.send_header('Access-Control-Allow-Origin', '*');self.send_header('Access-Control-Allow-Headers', 'Authorization, Content-Type');self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');self.send_header('Access-Control-Allow-Origin', '*');self.send_header('Access-Control-Allow-Headers', 'Authorization, Content-Type');self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');self.send_header('Access-Control-Allow-Origin', '*');self.send_header('Cache-Control','no-cache');self.send_header('X-Content-Type-Options','nosniff');self.send_header('Referrer-Policy','no-referrer');super().end_headers()
     def send(self,c,body,ct='application/json',loc=None):
         try:
             self.send_response(c);self.send_header('Content-Type',ct);self.send_header('Content-Length',str(len(body)))
@@ -236,9 +236,15 @@ class H(SimpleHTTPRequestHandler):
     def js(self,c,o):self.send(c,json.dumps(o).encode())
     def do_OPTIONS(self):
         self.send_response(200)
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+        self.send_header('Access-Control-Allow-Headers', 'Authorization, Content-Type')
         self.end_headers()
     def do_OPTIONS(self):
         self.send_response(200)
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+        self.send_header('Access-Control-Allow-Headers', 'Authorization, Content-Type')
         self.end_headers()
     def ip(self):return self.headers.get('X-Forwarded-For','').split(',')[0].strip() or self.client_address[0]
     def do_GET(self):
