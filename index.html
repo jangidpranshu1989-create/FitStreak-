@@ -1,0 +1,438 @@
+<!DOCTYPE html><html lang="en" data-t="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>FitStreak</title><meta name="description" content="Your voice. Your health."><meta name="theme-color" content="#121212"><link rel="manifest" href="manifest.json"><link rel="icon" href="icon.svg"><link rel="apple-touch-icon" href="icon-192.png"><link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f5f6;--s1:#fff;--s2:#eceef0;--bd:#dfe2e5;--tx:#16181a;--mu:#6b7177;--ac:#16181a;--on:#fff;--g:#5aa400;--bl:#2f7df6;--vi:#6b5cff;--bad:#e5484d}
+[data-t=dark]{--bg:#121212;--s1:#1c1c1e;--s2:#2a2a2d;--bd:#333336;--tx:#ececee;--mu:#9a9aa0;--ac:#e6e7ea;--on:#121212;--g:#c8f542;--bl:#5aa9ff;--vi:#9d8cff}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:Urbanist,system-ui,sans-serif;background:var(--bg);color:var(--tx);font-size:15px;line-height:1.45}
+button,input{font:inherit;color:inherit}button{cursor:pointer;border:0;background:none}a{color:inherit}
+h1{font-size:30px;font-weight:800;letter-spacing:-.6px}h2{font-size:22px;font-weight:800}h3{font-size:16px;font-weight:700}
+#v{max-width:480px;margin:auto;padding:max(16px,env(safe-area-inset-top)) 18px 150px;animation:in .35s both}@keyframes in{from{opacity:0;transform:translateY(8px)}}
+small,.mu{color:var(--mu)}small{font-size:12.5px;display:block}
+.top{display:flex;align-items:center;gap:12px;margin-bottom:18px}.gr{flex:1}.gr b{display:block;font-size:19px;font-weight:800}
+.av{width:44px;height:44px;border-radius:50%;background:var(--ac);color:var(--on);font-weight:800}
+.pill{padding:8px 12px;border-radius:99px;background:var(--s1);border:1px solid var(--bd);font-weight:700;font-size:14px}
+.ib{width:40px;height:40px;border-radius:50%;background:var(--s1);border:1px solid var(--bd);display:grid;place-items:center}
+.card{background:var(--s1);border:1px solid var(--bd);border-radius:24px;padding:18px;margin:14px 0}
+.hd{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}.g2 .card{margin:0}
+.rings{display:flex;justify-content:space-around;margin-top:14px}.rn{position:relative;text-align:center}.rn svg{width:92px;display:block}.rn b{position:absolute;top:31px;left:0;right:0;font-size:17px;font-weight:800}
+.r0,.r1{fill:none;stroke-width:7}.r0{stroke:var(--s2)}.r1{stroke-linecap:round;transition:stroke-dasharray .8s}
+.btn{display:block;width:100%;margin-top:12px;padding:15px;border-radius:99px;background:var(--ac);color:var(--on);font-weight:800;font-size:15px;text-align:center;text-decoration:none}
+.ghost{display:block;width:100%;margin-top:10px;padding:13px;border-radius:99px;border:1px solid var(--bd);font-weight:700;text-align:center}
+.sm{padding:8px 14px;border-radius:99px;background:var(--s2);font-weight:700;font-size:13px}
+.pl{padding:9px 16px;border-radius:99px;background:var(--s2);font-weight:600;font-size:14px}.pl.on{background:var(--ac);color:var(--on)}
+.rw{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.chip{display:inline-block;padding:7px 12px;margin:6px 6px 0 0;border-radius:99px;background:var(--s2);font-weight:600;font-size:12.5px}
+.wk{display:flex;justify-content:space-between;margin:14px 0 4px}.wk div{text-align:center;font-size:11px;font-weight:700;color:var(--mu)}
+.wk i{display:grid;place-items:center;width:36px;height:36px;border-radius:12px;background:var(--s2);font-style:normal;margin-bottom:5px;color:var(--tx)}
+.wk .ok i{background:var(--g);color:#121212}.wk .ms i{background:rgba(229,72,77,.15);color:var(--bad)}.wk .td i{outline:2px solid var(--ac);outline-offset:2px}
+.bar{height:8px;border-radius:8px;background:var(--s2);overflow:hidden;margin:8px 0 4px}.bar i{display:block;height:100%;border-radius:8px;background:var(--g)}
+.t{width:100%;padding:14px;border-radius:14px;border:1px solid var(--bd);background:var(--s2);font-size:16px;margin:6px 0;outline:0}.t:focus{border-color:var(--ac)}
+.row{display:flex;justify-content:space-between;align-items:center;padding:10px 0}
+.kp{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}.kp div{background:var(--s1);border:1px solid var(--bd);border-radius:20px;padding:14px}.kp b{font-size:21px;font-weight:800;display:block;margin-top:4px}
+.dl{font-size:12px;font-weight:700;padding:3px 8px;border-radius:99px}.up{background:rgba(90,164,0,.15);color:var(--g)}.dn{background:rgba(229,72,77,.15);color:var(--bad)}
+.cg{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;text-align:center;margin:12px 0}.cg i{font-style:normal;font-size:11px;color:var(--mu)}
+.cd{aspect-ratio:1;border-radius:12px;font-weight:700;font-size:13px}.cd.ok{background:var(--g);color:#121212}.cd.ms{background:rgba(229,72,77,.12);color:var(--bad)}.cd.td{outline:2px solid var(--ac);outline-offset:1px}.cd.sl{box-shadow:0 0 0 3px var(--bd)}
+.ch{width:100%;margin-top:8px}.ch text{fill:var(--mu);font-size:10px}
+.bars{display:flex;gap:8px;align-items:flex-end;height:130px;margin-top:10px}.bars div{flex:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px;font-size:10px;color:var(--mu)}.bars i{width:100%;border-radius:8px;background:var(--g);opacity:.35;min-height:3px}.bars div:last-child i{opacity:1}
+.mac{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px;text-align:center}.mac b{display:block;font-size:17px}
+.meal{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-top:1px solid var(--bd)}.meal:first-of-type{border-top:0}
+.rec{display:block;width:100%;text-align:left;padding:14px 16px;margin:8px 0;border-radius:18px;background:var(--s1);border:1px solid var(--bd);font-weight:600}
+.m{max-width:88%;padding:12px 16px;border-radius:20px;font-size:15px;margin:10px 0}.m.b{background:var(--s1);border:1px solid var(--bd);border-bottom-left-radius:6px}.m.u{background:var(--ac);color:var(--on);margin-left:auto;border-bottom-right-radius:6px}.m sup{color:var(--bl);font-weight:800}
+.srcs{display:flex;flex-direction:column;gap:6px;margin:4px 0 10px 4px;width:100%}.src{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;background:var(--s1);border:1px solid var(--bd);font-size:13px;font-weight:600;text-decoration:none;color:var(--tx)}.src i{font-style:normal;background:var(--bl);color:#fff;border-radius:50%;width:20px;height:20px;display:grid;place-items:center;font-size:11px;flex-shrink:0}
+.cmp{position:sticky;bottom:96px;display:flex;gap:6px;align-items:center;padding:7px;border-radius:99px;background:var(--s1);border:1px solid var(--bd);margin-top:12px;box-shadow:0 10px 30px rgba(0,0,0,.25)}.cmp input{flex:1;border:0;background:none;padding:8px;font-size:15px;outline:0;min-width:0}.cmp button{width:40px;height:40px;border-radius:50%;background:var(--s2);display:grid;place-items:center}.cmp .go{background:var(--ac);color:var(--on);font-weight:800}
+/* 3D Loading Animation */
+.ty3d{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;perspective:100px;margin-right:8px;flex-shrink:0}
+.ty3d div{width:8px;height:8px;background:var(--mu);border-radius:50%;animation:pulse3d 1.5s infinite ease-in-out;transform-style:preserve-3d}
+@keyframes pulse3d{0%,100%{transform:scale(1) rotateX(0deg) rotateY(0deg);opacity:0.5;box-shadow:0 0 0 rgba(0,0,0,0)}50%{transform:scale(1.4) rotateX(180deg) rotateY(180deg);opacity:1;box-shadow:0 0 8px var(--mu)}}
+.sw{width:52px;height:30px;border-radius:30px;background:var(--s2);position:relative;transition:.2s}.sw::after{content:'';position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;transition:.2s}.sw.on{background:var(--g)}.sw.on::after{left:25px}
+.pro{border-radius:24px;padding:20px;background:var(--ac);color:var(--on);margin:14px 0}.pro ul{list-style:none;margin:12px 0}.pro li{padding:4px 0}.pro li::before{content:'✓  ';font-weight:800}.pro .btn{background:var(--on);color:var(--ac)}.price{font-size:40px;font-weight:800;letter-spacing:-1px}
+.stp{display:flex;gap:12px;align-items:flex-start;margin:14px 0}.stp b{flex:none;width:28px;height:28px;border-radius:50%;background:var(--ac);color:var(--on);display:grid;place-items:center;font-size:14px}
+.dock{position:fixed;left:50%;bottom:max(16px,env(safe-area-inset-bottom));transform:translateX(-50%);display:flex;align-items:center;gap:2px;padding:8px;border-radius:99px;background:var(--s1);border:1px solid var(--bd);box-shadow:0 18px 40px -10px rgba(0,0,0,.5);z-index:10}
+.dock button{width:50px;height:50px;border-radius:50%;color:var(--mu);display:grid;place-items:center}.dock .on{background:var(--s2);color:var(--tx)}.dock svg{width:23px;height:23px;stroke:currentColor;fill:none;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}.dock .mic{width:60px;height:60px;background:var(--ac);color:var(--on);margin:0 6px}
+#vo{position:fixed;inset:0;z-index:40;background:#121212;color:#ececee;display:none;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:28px;text-align:center}#vo.s{display:flex}
+#vc{width:130px;height:130px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#9a9aa0)}#vc.on{animation:pu 1.2s infinite}@keyframes pu{50%{transform:scale(1.15)}}
+#vt{font-size:22px;font-weight:800}#vs{font-size:16px;opacity:.8}#vo .ghost{width:auto;padding:12px 30px;border-color:#444}
+.sh{position:fixed;inset:0;z-index:60;display:flex;align-items:flex-end;justify-content:center}.sh[hidden]{display:none}.bk{position:absolute;inset:0;background:rgba(0,0,0,.6)}
+.pn{position:relative;width:100%;max-width:480px;max-height:92vh;overflow:auto;background:var(--bg);border-radius:28px 28px 0 0;padding:22px 18px 30px;animation:in .3s}
+#wl{position:fixed;inset:0;z-index:50;background:#121212;color:#ececee;display:flex;flex-direction:column;justify-content:center;gap:14px;padding:28px}#wl h1{font-size:36px;line-height:1.08}#wl .t{background:#2a2a2d;border-color:#333336;color:#ececee}#wl .btn{background:#ececee;color:#121212}#wl small{color:#9a9aa0}#wl li{list-style:none;padding:4px 0}#wl li::before{content:'✓  ';font-weight:800}
+#ts{position:fixed;left:50%;bottom:112px;transform:translate(-50%,20px);background:var(--ac);color:var(--on);padding:12px 20px;border-radius:30px;font-weight:700;font-size:14px;opacity:0;pointer-events:none;transition:.25s;z-index:70;max-width:90%;text-align:center}#ts.s{opacity:1;transform:translate(-50%,0)}
+:focus-visible{outline:3px solid var(--bl);outline-offset:2px}@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="auth.js"></script></head><body>
+
+<div id="splash" style="position:fixed;inset:0;background:#121212;display:grid;place-items:center;z-index:9999;transition:opacity .3s;">
+  <img src="icon.svg" width="80" height="80" alt="Loading" style="border-radius:20px;animation:sp 1.5s ease-in-out infinite;">
+</div>
+<style>@keyframes sp{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.1);opacity:.7}}</style>
+
+<div id="auth-screen" style="display:none;position:fixed;inset:0;background:#121212;z-index:9998;flex-direction:column;align-items:center;justify-content:center;padding:24px;font-family:Urbanist,sans-serif;">
+  <img src="icon.svg" width="60" height="60" alt="Logo" style="border-radius:16px;margin-bottom:20px;">
+  <h1 style="color:#fff;font-size:32px;margin-bottom:8px;text-align:center;">Welcome to FitStreak</h1>
+  <p style="color:#9a9aa0;margin-bottom:30px;text-align:center;">Your voice. Your health.</p>
+  
+  <div style="width:100%;max-width:360px;">
+    <input id="auth-email" type="email" placeholder="Email address" style="width:100%;padding:16px;border-radius:14px;border:1px solid #333336;background:#2a2a2d;color:#fff;font-size:16px;margin-bottom:12px;outline:none;">
+    <input id="auth-pass" type="password" placeholder="Password (min 6 chars)" style="width:100%;padding:16px;border-radius:14px;border:1px solid #333336;background:#2a2a2d;color:#fff;font-size:16px;margin-bottom:20px;outline:none;">
+    
+    <button id="auth-btn-main" onclick="window.authBtnClick()" style="width:100%;padding:16px;border-radius:99px;background:#ececee;color:#121212;font-weight:800;font-size:16px;border:none;margin-bottom:16px;">Login</button>
+    
+    <div style="text-align:center;margin-bottom:20px;">
+      <span id="auth-toggle" onclick="window.authToggle()" style="color:#9d8cff;font-size:14px;cursor:pointer;font-weight:600;">Don't have an account? Sign up</span>
+    </div>
+    
+    <div style="display:flex;align-items:center;margin-bottom:20px;"><hr style="flex:1;border:none;border-top:1px solid #333336;"><span style="padding:0 10px;color:#9a9aa0;font-size:12px;">OR</span><hr style="flex:1;border:none;border-top:1px solid #333336;"></div>
+    
+    <button id="auth-google" onclick="window.auth.signInWithGoogle()" style="width:100%;padding:16px;border-radius:99px;background:transparent;border:1px solid #444;color:#fff;font-weight:700;font-size:16px;display:flex;align-items:center;justify-content:center;gap:10px;">
+      <img src="https://www.google.com/favicon.ico" width="18" height="18"> Continue with Google
+    </button>
+  </div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = document.getElementById('auth-btn-main'), toggle = document.getElementById('auth-toggle');
+  const email = document.getElementById('auth-email'), pass = document.getElementById('auth-pass');
+  let isLogin = true;
+
+  toggle.onclick = () => {
+    isLogin = !isLogin;
+    btn.textContent = isLogin ? 'Login' : 'Sign Up';
+    toggle.textContent = isLogin ? "Don't have an account? Sign up" : "Already have an account? Login";
+  };
+
+  btn.onclick = async () => {
+    if(!email.value || !pass.value) return alert('Please enter email and password');
+    btn.textContent = 'Please wait...';
+    try {
+      if(isLogin) await window.auth.signInEmail(email.value, pass.value);
+      else await window.auth.signUpEmail(email.value, pass.value);
+    } catch(e) { alert(e.message); }
+    btn.textContent = isLogin ? 'Login' : 'Sign Up';
+  };
+
+  document.getElementById('auth-google').onclick = () => window.auth.signInWithGoogle();
+});
+</script>
+
+<main id="v"></main>
+<nav class="dock">
+<button data-a="tab" data-v="home" aria-label="Home"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v9a1 1 0 01-1 1h-5v-6H9v6H4a1 1 0 01-1-1z"/></svg></button>
+<button data-a="tab" data-v="meals" aria-label="Meals"><svg viewBox="0 0 24 24"><path d="M7 3v8M4 3v5a3 3 0 006 0V3M7 11v10M17 3c-2 2-3 5-3 8h3v10"/></svg></button>
+<button class="mic" data-a="mic" aria-label="Voice assistant"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0014 0M12 18v3"/></svg></button>
+<button data-a="tab" data-v="coach" aria-label="Coach"><svg viewBox="0 0 24 24"><path d="M12 3l2.2 5.8L20 11l-5.8 2.2L12 19l-2.2-5.8L4 11l5.8-2.2z"/></svg></button>
+<button data-a="tab" data-v="progress" aria-label="Progress"><svg viewBox="0 0 24 24"><path d="M5 20v-8M12 20V4M19 20v-5"/></svg></button>
+</nav>
+<div id="vo"><div id="vc"></div><p id="vt">Listening...</p><p id="vs"></p><button class="ghost" data-a="vclose">Done</button></div>
+<div class="sh" id="sh" hidden><div class="bk" data-a="x"></div><div class="pn" id="pn"></div></div><div id="ts"></div>
+<script>
+const $d=document,$=s=>$d.querySelector(s),K='fsv3',D7=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],TARGET=12,LIB=['Bench Press','Incline Press','Push-ups','Pull-ups','Barbell Row','Lat Pulldown','Shoulder Press','Lateral Raise','Bicep Curl','Tricep Pushdown','Squat','Leg Press','Deadlift','Lunges','Plank','Crunches'];
+let db;try{db=JSON.parse(localStorage.getItem(K))}catch(e){}
+db=db||{uid:(crypto.randomUUID?crypto.randomUUID():Date.now()+'-'+Math.random().toString(36).slice(2)),name:'',days:{},goal:5,theme:'dark',voice:1,lang:'en-IN',chat:[],chats:[]};db.cal=db.cal||2000;
+db.chats = db.chats || [];
+if (db.chat && db.chat.length > 0) {
+  db.chats.unshift({ id: Date.now().toString(), title: (db.chat.find(m=>m.r=='u')?.t || 'Old Chat').slice(0, 30), msgs: db.chat, ts: Date.now() });
+  db.chat = [];
+}
+window.db = db;
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(db))}catch(e){}},esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])),pad=n=>String(n).padStart(2,'0'),
+key=d=>{d=d||new Date();return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())},
+gd=k=>{const d=db.days[k]||{};return{sets:d.sets||[],meals:d.meals||[],water:d.water||0,sleep:d.sleep||0,type:d.type}},
+day=k=>{const d=db.days[k]||(db.days[k]={});d.sets=d.sets||[];d.meals=d.meals||[];d.water=d.water||0;d.sleep=d.sleep||0;return d},
+done=k=>!!(db.days[k]&&db.days[k].sets&&db.days[k].sets.length),vol=k=>gd(k).sets.reduce((a,s)=>a+(s.w||1)*s.r,0),kc=k=>gd(k).meals.reduce((a,m)=>a+m.k,0),
+fmt=n=>n>=1000?(n/1000).toFixed(1)+'k':Math.round(n),cl=(n,m)=>Math.max(0,Math.min(m,+n||0)),nm=s=>String(s||'').replace(/[<>]/g,'').trim().slice(0,60),
+mon=o=>{const d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()-((d.getDay()+6)%7)-7*o);return d},
+wk=o=>{const d=mon(o),r={v:0,s:0,n:0,a:[]};for(let i=0;i<7;i++){const k=key(d),v=vol(k);r.a.push(v);r.v+=v;r.s+=gd(k).sets.length;if(done(k))r.n++;d.setDate(d.getDate()+1)}return r},
+wkKeys=()=>{const m=mon(0);return D7.map((_,i)=>{const d=new Date(m);d.setDate(m.getDate()+i);return key(d)})},
+dlt=(a,b)=>b?Math.round((a-b)/b*100):null,chipD=v=>v==null?'':`<span class="dl ${v>=0?'up':'dn'}">${v>=0?'+':''}${v}%</span>`,
+api=(p,b,o={})=>window.auth.authFetch(p,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b),...o});
+function streaks(){const ks=Object.keys(db.days).filter(done).sort(),t=key();if(!ks.length)return[0,0];let d=new Date(ks[0]+'T00:00'),run=0,miss=0,best=0;for(;key(d)<=t;d.setDate(d.getDate()+1)){if(done(key(d))){run++;miss=0;best=Math.max(best,run)}else if(key(d)!=t&&++miss>=2){run=0;miss=0}}return[run,best]}
+function line(v,lb,id){const x=i=>20+i*260/(v.length-1||1),m=Math.max(...v,1),y=n=>108-n/m*76,P=v.map((n,i)=>x(i)+','+y(n));return`<svg viewBox="0 0 300 138" class="ch"><defs><linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--g)" stop-opacity=".4"/><stop offset="1" stop-color="var(--g)" stop-opacity="0"/></linearGradient></defs><path d="M${x(0)},108L${P.join('L')}L${x(v.length-1)},108Z" fill="url(#${id})"/><polyline points="${P.join(' ')}" fill="none" stroke="var(--g)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>${v.map((n,i)=>`<circle cx="${x(i)}" cy="${y(n)}" r="3.5" fill="var(--s1)" stroke="var(--g)" stroke-width="2"/>`).join('')}${lb.map((t,i)=>`<text x="${x(i)}" y="130" text-anchor="middle">${t}</text>`).join('')}</svg>`}
+const ring=(p,c,l,v)=>`<div class="rn"><svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="33" class="r0"/><circle cx="40" cy="40" r="33" class="r1" style="stroke:${c}" stroke-dasharray="${(Math.min(100,p)*2.073).toFixed(1)} 208" transform="rotate(-90 40 40)"/></svg><b>${v}</b><small>${l}</small></div>`;
+let V='home',cmo=0,sd=key(),chat=[],activeChatId=null,busy=0,S={active:0,left:'',price:199,pending:0,rejected:0,upi:'',upn:'',support:'',search:0};
+
+
+window.showDialog = function(opts) {
+  let html = `<h2>${opts.title}</h2>`;
+  if(opts.message) html += `<p class="mu" style="margin-top:8px;margin-bottom:12px;font-size:14px;">${opts.message}</p>`;
+  if(opts.input) html += `<input id="dlg-input" class="t" value="${esc(opts.defaultValue||'')}" style="margin-bottom:12px;padding:14px;font-size:16px;background:var(--s2);">`;
+  html += `<div style="display:flex;gap:10px;margin-top:16px;">
+    <button class="ghost" style="margin:0;flex:1;background:var(--s2);border:0;" onclick="document.getElementById('sh').hidden=true">Cancel</button>
+    <button class="btn" style="margin:0;flex:1;" id="dlg-ok">Confirm</button>
+  </div>`;
+  sheet(html);
+  document.getElementById('dlg-ok').onclick = () => {
+    const val = opts.input ? document.getElementById('dlg-input').value : null;
+    document.getElementById('sh').hidden = true;
+    if(opts.onConfirm) opts.onConfirm(val);
+  };
+};
+
+function openSidebar() {
+  document.getElementById('chat-sidebar').style.display = 'block';
+  renderChatList();
+}
+function renderChatList() {
+  const list = document.getElementById('chat-list');
+  if(!list) return;
+  list.innerHTML = db.chats.map(c => `
+    <div style="display:flex;align-items:center;gap:6px;background:var(--s2);border-radius:14px;padding:10px 14px;${c.id===activeChatId?'border:1px solid var(--ac)':''}">
+      <div style="flex:1;font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer" onclick="loadChat('${c.id}')">
+        ${esc(c.title)}
+      </div>
+      <button onclick="window.renameChat('${c.id}')" style="padding:6px;opacity:0.6;color:var(--tx);" title="Rename">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+      </button>
+      <button onclick="window.deleteChat('${c.id}')" style="padding:6px;opacity:0.6;color:var(--bad);" title="Delete">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"></path><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+      </button>
+    </div>
+  `).join('') || '<small style="color:var(--mu);text-align:center;margin-top:20px">No past chats</small>';
+}
+function saveCurrentChat() {
+  if (chat.length === 0) return;
+  let title = chat.find(m => m.r === 'u')?.t || 'New Chat';
+  if (title.length > 30) title = title.slice(0, 30) + '...';
+  
+  if (activeChatId) {
+    const c = db.chats.find(x => x.id === activeChatId);
+    if (c) { c.msgs = [...chat]; c.title = title; }
+  } else {
+    activeChatId = Date.now().toString();
+    db.chats.unshift({ id: activeChatId, title, msgs: [...chat], ts: Date.now() });
+  }
+  save();
+}
+function loadChat(id) {
+  const c = db.chats.find(x => x.id === id);
+  if (c) {
+    activeChatId = id;
+    chat = [...c.msgs];
+    document.getElementById('chat-sidebar').style.display = 'none';
+    if(V !== 'coach') go('coach'); else render();
+  }
+}
+
+window.renameChat = (id) => {
+  const c = db.chats.find(x => x.id === id);
+  if (!c) return;
+  window.showDialog({
+    title: 'Rename Chat',
+    input: true,
+    defaultValue: c.title,
+    onConfirm: (newTitle) => {
+      if (newTitle && newTitle.trim()) {
+        c.title = newTitle.trim();
+        save();
+        renderChatList();
+      }
+    }
+  });
+};
+window.deleteChat = (id) => {
+  window.showDialog({
+    title: 'Delete Chat',
+    message: 'Are you sure you want to delete this chat?',
+    onConfirm: () => {
+      db.chats = db.chats.filter(x => x.id !== id);
+      if (activeChatId === id) {
+        activeChatId = null;
+        chat = [];
+        render();
+      }
+      save();
+      renderChatList();
+    }
+  });
+};
+
+function newChatSession() {
+  activeChatId = null;
+  chat = [];
+  document.getElementById('chat-sidebar').style.display = 'none';
+  if(V !== 'coach') go('coach'); else render();
+}
+
+const recs=()=>{const d=gd(key()),r=[];if(!d.sets.length)r.push('Plan my workout for today');if(!d.meals.length)r.push('What should I eat for breakfast?');if(d.water<4)r.push('How much water should I drink daily?');r.push('Best high protein vegetarian foods in India','How do I break a workout plateau?','Summarize my day');return r.slice(0,5)};
+function cal(){const n=new Date(),f=new Date(n.getFullYear(),n.getMonth()+cmo,1),dim=new Date(f.getFullYear(),f.getMonth()+1,0).getDate(),fr=Object.keys(db.days).filter(done).sort()[0]||'9',t=key();let c=D7.map(x=>`<i>${x[0]}</i>`).join('');for(let i=0;i<(f.getDay()+6)%7;i++)c+='<b></b>';
+for(let i=1;i<=dim;i++){const k=key(new Date(f.getFullYear(),f.getMonth(),i));c+=`<button class="cd${done(k)?' ok':k<t&&k>fr?' ms':''}${k==t?' td':''}${k==sd?' sl':''}" data-a="cal" data-d="${k}">${i}</button>`}
+const d=gd(sd);return`<div class="card"><div class="hd"><button class="ib" data-a="cmo" data-n="-1" aria-label="Previous month">‹</button><h3>${f.toLocaleDateString('en-IN',{month:'long',year:'numeric'})}</h3><button class="ib" data-a="cmo" data-n="1" aria-label="Next month">›</button></div><div class="cg">${c}</div><small style="text-align:center">One missed day is fine. Two in a row resets your streak.</small><p style="margin-top:12px"><b>${new Date(sd+'T00:00').toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'short'})}</b><br><span class="mu">${d.sets.length?d.sets.length+' sets · '+fmt(vol(sd))+' kg · ':'No workout · '}${kc(sd)} kcal · Water ${d.water} · Sleep ${d.sleep||'-'} h</span></p></div>`}
+const views={
+home(){const t=key(),d=gd(t),[st]=streaks(),w=wk(0),m=mon(0),yd=key(new Date(Date.now()-864e5)),h=new Date().getHours(),g=h<12?'Good morning':h<18?'Good afternoon':'Good evening',k=kc(t),
+msg=done(t)?'Nice work. Today is logged.':st>0&&!done(yd)?'You missed yesterday. Train today to keep your streak.':st>0?'Train today to extend your streak.':'Say your first workout to start a streak.',
+dots=D7.map((l,i)=>{const x=new Date(m);x.setDate(m.getDate()+i);const q=key(x),c=done(q)?'ok':q==t?'td':q>t||q<(Object.keys(db.days).filter(done).sort()[0]||'9')?'':'ms';return`<div class="${c}"><i>${c=='ok'?'✓':c=='ms'?'×':''}</i>${l[0]}</div>`}).join('');
+return`<header class="top"><button class="av" data-a="tab" data-v="me" aria-label="Profile">${esc((db.name||'C')[0].toUpperCase())}</button><div class="gr"><small>${g}</small><b>${esc(db.name||'Champ')}</b></div><div class="pill">🔥 ${st}</div><button class="ib" data-a="theme" aria-label="Toggle theme">◐</button></header>
+<section class="card"><div class="hd"><h3>Today</h3><small>${new Date().toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short'})}</small></div><div class="rings">${ring(k/db.cal*100,'var(--g)','Calories',k)}${ring(d.sets.length/TARGET*100,'var(--vi)','Sets',d.sets.length)}${ring(d.water/8*100,'var(--bl)','Water',d.water)}</div></section>
+${S.active||S.left===''||S.left>3?'':`<button class="rec" data-a="tab" data-v="pay">${S.left} free AI commands left today. Unlock unlimited with Pro</button>`}
+<section class="card"><div class="hd"><h3>Streak</h3><small>${w.n} of ${db.goal} days</small></div><p class="mu">${msg}</p><div class="wk">${dots}</div></section>
+<section class="card"><div class="hd"><h3>Workout</h3><button class="sm" data-a="add">+ Set</button></div>${d.sets.map((s,i)=>`<button class="chip" data-a="del" data-i="${i}">${esc(s.e)} ${s.w?s.w+' kg ':''}× ${s.r}</button>`).join('')||'<small style="margin-top:6px">Tap the mic and say: “bench press 40 kg 8 reps 3 sets”</small>'}</section>
+<section class="card"><div class="hd"><h3>Meals</h3><button class="sm" data-a="tab" data-v="meals">Open</button></div>${d.meals.slice(-3).map(x=>`<div class="meal"><span>${esc(x.n)}</span><b>${x.k} kcal</b></div>`).join('')||'<small style="margin-top:6px">Nothing logged. Scan a meal or say what you ate.</small>'}</section>
+<div class="g2"><section class="card"><small>Water</small><h2 style="margin:6px 0">${d.water}<small style="display:inline"> / 8</small></h2><div class="bar"><i style="width:${Math.min(100,d.water/8*100)}%;background:var(--bl)"></i></div><div class="rw"><button class="sm" data-a="wat" data-n="-1" aria-label="Remove glass">−</button><button class="sm" data-a="wat" data-n="1">+ Glass</button></div></section><section class="card"><small>Sleep</small><h2 style="margin:6px 0">${d.sleep||'–'}<small style="display:inline"> h</small></h2><div class="bar"><i style="width:${Math.min(100,d.sleep/8*100)}%;background:var(--vi)"></i></div><button class="sm" data-a="slp" style="margin-top:8px">Log sleep</button></section></div>`},
+meals(){const t=key(),d=gd(t),k=kc(t),s=(f)=>d.meals.reduce((a,m)=>a+(m[f]||0),0);
+return`<h1>Meals</h1><section class="card"><div class="hd"><div><small>Eaten today</small><h2>${k}<small style="display:inline"> / ${db.cal} kcal</small></h2></div><small>${Math.max(0,db.cal-k)} left</small></div><div class="bar"><i style="width:${Math.min(100,k/db.cal*100)}%"></i></div><div class="mac"><div><small>Protein</small><b>${s('p')} g</b></div><div><small>Carbs</small><b>${s('c')} g</b></div><div><small>Fat</small><b>${s('f')} g</b></div></div></section>
+<button class="btn" data-a="scan">Scan food with camera</button><button class="ghost" data-a="addmeal">Add a meal manually</button>
+<section class="card">${d.meals.map((x,i)=>`<div class="meal"><div><b>${esc(x.n)}</b><small>P ${x.p||0} · C ${x.c||0} · F ${x.f||0}</small></div><div><b>${x.k} kcal</b> <button class="sm" data-a="delm" data-i="${i}" aria-label="Remove meal">✕</button></div></div>`).join('')||'<small>No meals yet. Calories and macros from photos and voice are estimates.</small>'}</section>`},
+progress(){const w=wk(0),p=wk(1),dv=dlt(w.v,p.v),ks=wkKeys(),lb=D7.map(x=>x[0]),
+vd=dv==null?'Your first tracked week. Keep going.':dv>5?`${dv}% more volume than last week. Great work.`:dv<-5?`${-dv}% less than last week. Push a little harder.`:'Steady, matching last week.',
+six=[5,4,3,2,1,0].map(o=>wk(o).v),sl=[5,4,3,2,1,0].map(o=>{const d=mon(o);return d.getDate()+'/'+(d.getMonth()+1)});
+return`<h1>Progress</h1><div class="kp"><div><small>Volume</small><b>${fmt(w.v)}</b>${chipD(dv)}</div><div><small>Sets</small><b>${w.s}</b>${chipD(dlt(w.s,p.s))}</div><div><small>Active days</small><b>${w.n}/${db.goal}</b></div></div>
+<div class="card"><h3>This week</h3><p class="mu">${vd}</p>${line(w.a,lb,'g1')}</div>${cal()}
+<div class="card"><h3>Last 6 weeks</h3><div class="bars">${six.map((n,i)=>`<div>${fmt(n)}<i style="height:${n/Math.max(...six,1)*100}%"></i>${sl[i]}</div>`).join('')}</div></div>
+<div class="card"><h3>Calories (kcal)</h3>${line(ks.map(kc),lb,'g2')}</div><div class="card"><h3>Water (glasses)</h3>${line(ks.map(k=>gd(k).water),lb,'g3')}</div><div class="card"><h3>Sleep (hours)</h3>${line(ks.map(k=>gd(k).sleep),lb,'g4')}</div>`},
+coach(){const body=chat.length?chat.map((m,i)=>{if(m.r=='u')return`<div class="m u">${esc(m.t)}</div>`;const uniqSrc=(m.src||[]).filter(s=>/^https?:\/\//.test(s.url)).filter((v,i,a)=>a.findIndex(v2=>(new URL(v2.url).hostname===new URL(v.url).hostname))===i);
+const sr=uniqSrc.map(s=>{let h=s.url;try{h=new URL(s.url).hostname.replace('www.','')}catch(e){}return`<a class="src" href="${esc(s.url)}" target="_blank" rel="noopener noreferrer"><i>${s.n}</i><span style="flex:1">${esc(h)}</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.4"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></a>`}).join('');
+return`<div class="m b">${esc(m.t).replace(/\[(\d)\]/g,'<sup>$1</sup>').replace(/\n/g,'<br>')}</div>${sr?`<div style="margin:-4px 0 8px 4px"><small style="font-weight:700;margin-bottom:6px;display:block;color:var(--mu);font-size:11px;text-transform:uppercase;letter-spacing:0.5px">Sources</small><div class="srcs">${sr}</div></div>`:''}${i==chat.length-1&&m.fu?m.fu.map(f=>`<button class="chip" data-a="chip" data-q="${esc(f)}">${esc(f)}</button>`).join(''):''}`}).join('')+(busy?'<div class="m b" style="display:flex;align-items:center;"><div class="ty3d"><div></div></div><span id="status-text" style="font-size:13px;color:var(--mu)">Thinking...</span></div>':''):`<div style="margin:24px 0 8px"><h2>Ask anything about your health.</h2><p class="mu">I know your workouts and meals${S.search?', and I can search the web with sources':''}.</p></div><small style="margin:14px 0 4px">Suggested for you</small>${recs().map(q=>`<button class="rec" data-a="chip" data-q="${esc(q)}">${esc(q)}</button>`).join('')}`;
+return`<div class="hd"><div style="display:flex;align-items:center;gap:12px;"><button onclick="openSidebar()" style="font-size:24px;">☰</button><h1>Coach</h1></div><button class="sm" onclick="newChatSession()">+ New chat</button></div><div id="cl">${body}</div><div class="cmp"><button data-a="scan" aria-label="Scan food"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></button><input id="ci" maxlength="400" placeholder="Ask or log anything" aria-label="Message"><button data-a="mic" aria-label="Voice"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0014 0M12 18v3"/></svg></button><button class="go" data-a="send" id="send-btn" aria-label="Send">↑</button></div><small style="text-align:center;margin-top:10px">AI is not a doctor. Stop and see a doctor if you feel pain, dizziness or chest discomfort.</small>`},
+me(){return`<h1>Profile</h1>${S.active?`<div class="pro"><h2>FitStreak Pro</h2><p style="opacity:.8">Unlimited voice commands, AI coaching and scans. Thank you!</p></div>`:`<div class="pro"><h3>FitStreak Pro</h3><div class="price">₹${S.price}<small style="display:inline;opacity:.7;font-size:14px"> one-time</small></div><p style="opacity:.8">${S.left===''?'':S.left+' free AI commands left today.'}</p><button class="btn" data-a="tab" data-v="pay">Unlock Pro</button></div>`}
+<div class="card"><small>Name</small><input class="t" id="nm" maxlength="24" value="${esc(db.name)}" placeholder="Your name"><small style="margin-top:10px">Daily calorie goal</small><input class="t" id="cg" type="number" inputmode="numeric" value="${db.cal}"><small style="margin-top:10px">Weekly workout goal (days)</small><div class="rw">${[3,4,5,6,7].map(n=>`<button class="pl${db.goal==n?' on':''}" data-a="goal" data-n="${n}">${n}</button>`).join('')}</div><small>Voice language</small><div class="rw">${[['en-IN','English'],['hi-IN','Hindi']].map(([l,n])=>`<button class="pl${db.lang==l?' on':''}" data-a="lang" data-l="${l}">${n}</button>`).join('')}</div><div class="row"><span>Spoken replies</span><button class="sw${db.voice?' on':''}" data-a="voice" aria-label="Spoken replies"></button></div></div>
+<div class="card"><button class="ghost" style="margin:0" data-a="recover">Restore my Pro purchase</button>${S.support?`<small style="margin-top:12px">Support: ${esc(S.support)}</small>`:''}<button class="ghost" data-a="exp">Download backup</button><button class="ghost" data-a="rst">Delete all data</button>${window.auth.session?'<button class="ghost" style="color:var(--bad)" onclick="window.auth.signOut()">Logout</button>':''}<small style="margin-top:6px">Your workout and meal data stays on this phone. Voice, chat and scans are sent to an AI service to reply. Calories are estimates. FitStreak does not give medical advice.</small></div>`},
+pay(){const ref=db.uid.slice(0,6).toUpperCase(),link=`upi://pay?pa=${encodeURIComponent(S.upi)}&pn=${encodeURIComponent(S.upn)}&am=${S.price}&cu=INR&tn=${encodeURIComponent('FitStreak Pro '+ref)}`;
+if(S.active)return`<div class="top"><button class="ib" data-a="tab" data-v="me" aria-label="Back">‹</button></div><div class="pro"><h2>You are on Pro</h2><p style="opacity:.8">Everything is unlocked.</p></div>`;
+return`<div class="top"><button class="ib" data-a="tab" data-v="me" aria-label="Back">‹</button><h2>FitStreak Pro</h2></div><div class="pro"><div class="price">₹${S.price}</div><p style="opacity:.8">One-time payment. No subscription.</p><ul><li>Unlimited voice assistant</li><li>AI coach with web sources</li><li>Food scanner and meal tracking</li><li>All future updates</li></ul></div>
+${S.pending?`<div class="card"><h3>Payment under review</h3><p class="mu">We received your UTR. Pro unlocks as soon as the payment is verified, usually within a few hours. Reference ${ref}.</p><button class="ghost" data-a="refresh">Check status</button></div>`:`<div class="card">${S.rejected?'<p style="color:var(--bad);margin-bottom:10px">We could not verify your last payment. Please check the UTR and try again.</p>':''}
+<div class="stp"><b>1</b><div><h3>Pay ₹${S.price} by UPI</h3>${S.upi?`<a class="btn" href="${link}">Pay with UPI app</a><button class="ghost" data-a="copy">Copy UPI ID: ${esc(S.upi)}</button><small style="margin-top:8px">Pay to ${esc(S.upn)}. Note: FitStreak Pro ${ref}</small>`:'<small>Payments are not set up yet.</small>'}</div></div>
+<div class="stp"><b>2</b><div style="flex:1"><h3>Enter your payment details</h3><input class="t" id="utr" inputmode="numeric" maxlength="14" placeholder="12 digit UTR / transaction ID"><input class="t" id="payer" maxlength="60" placeholder="Name on your UPI app"><button class="btn" data-a="submitpay">I have paid</button></div></div><small>Your UTR is in the payment success screen of your UPI app.</small></div>`}
+${S.support?`<small style="text-align:center">Need help? ${esc(S.support)}</small>`:''}`}};
+function go(v){V={profile:'me'}[v]||v;if(!views[V])V='home';render();scrollTo(0,0);if(V=='pay'||V=='me')stt()}
+function render(){try{$('#v').innerHTML=views[V]();$d.querySelectorAll('.dock [data-v]').forEach(b=>b.classList.toggle('on',b.dataset.v==V));if(V=='coach')scrollTo(0,$d.body.scrollHeight)}catch(e){console.error(e);$('#v').innerHTML='<div class="card"><h2>Something went wrong</h2><button class="btn" data-a="tab" data-v="home">Back to Home</button></div>'}}
+const applyTheme=()=>{$d.documentElement.dataset.t=db.theme;$d.querySelector('meta[name=theme-color]').content=db.theme=='dark'?'#121212':'#f4f5f6'},
+toast=m=>{const e=$('#ts');e.textContent=m;e.classList.add('s');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('s'),2600)},
+sheet=h=>{$('#pn').innerHTML=h;$('#sh').hidden=false},closeSheet=()=>{$('#sh').hidden=true};
+// ---- actions the voice assistant can run ----
+const ACT={
+log_set(a){const e=nm(a.exercise).replace(/\b\w/g,c=>c.toUpperCase()),r=cl(a.reps,500);if(!e||!r)return;const d=day(key()),n=cl(a.sets||1,20)||1;for(let i=0;i<n;i++)d.sets.push({e,w:cl(a.weight,500),r})},
+log_meal(a){const n=nm(a.name);if(!n)return;day(key()).meals.push({n,k:cl(a.calories,5000),p:cl(a.protein,500),c:cl(a.carbs,800),f:cl(a.fat,500)})},
+water(a){const d=day(key());d.water=Math.max(0,Math.min(30,d.water+(+a.n||1)))},sleep(a){day(key()).sleep=cl(a.hours,24)},day_type(a){day(key()).type=nm(a.name)},
+undo(){day(key()).sets.pop()},undo_meal(){day(key()).meals.pop()},goto(a){go(a.tab)},new_chat(){newChatSession()},
+scan(){go('meals');toast('Tap “Scan food with camera”')},upgrade(){go('pay')},set_name(a){db.name=nm(a.name)},set_goal(a){const c=cl(a.calories,6000);if(c>=800)db.cal=c},theme(a){db.theme=a.mode=='light'?'light':'dark';applyTheme()}};
+const run=l=>{l.forEach(a=>{try{ACT[a.type]&&ACT[a.type](a)}catch(e){}});save();render()};
+function ctx(){const t=key(),d=gd(t),[st,bs]=streaks(),w=wk(0),p=wk(1);return{name:db.name,streak:st,bestStreak:bs,goalDaysPerWeek:db.goal,calorieGoal:db.cal,today:{type:d.type||'',sets:d.sets.map(s=>s.e+' '+s.w+'kg x'+s.r),meals:d.meals.map(m=>m.n+' '+m.k+'kcal'),kcal:kc(t),water:d.water,sleepHours:d.sleep},week:{volume:Math.round(w.v),sets:w.s,days:w.n,lastWeekVolume:Math.round(p.v)},last7:[...Array(7)].map((_,i)=>{const k=key(new Date(Date.now()-i*864e5));return{date:k,sets:gd(k).sets.length,volume:Math.round(vol(k)),kcal:kc(k)}})}}
+// ---- voice ----
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;let rec,vopen=0,idle=0,said='';
+function vOpen(){if(!SR)return toast('Voice needs Chrome');vopen=1;idle=0;$('#vo').classList.add('s');$('#vt').textContent='Listening...';$('#vs').textContent='';listen()}
+function vClose(){vopen=0;$('#vo').classList.remove('s');try{rec&&rec.abort()}catch(e){}speechSynthesis.cancel()}
+function listen(){said='';rec=new SR();rec.lang=db.lang;rec.interimResults=true;rec.onresult=e=>{said=[...e.results].map(r=>r[0].transcript).join('');$('#vt').textContent=said};
+rec.onerror=e=>{if(e.error=='not-allowed'){toast('Please allow microphone access');vClose()}};
+rec.onend=()=>{if(!vopen)return;if(said.trim()){idle=0;ask(said)}else if(++idle>=2)vClose();else listen()};$('#vc').classList.add('on');try{rec.start()}catch(e){}}
+function speak(s){if(!vopen)return;if(!db.voice)return listen();speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(s.replace(/\[\d\]/g,''));u.lang=db.lang;u.onend=()=>vopen&&listen();speechSynthesis.speak(u)}
+async function ask(t){
+$('#vc').classList.remove('on');$('#vs').textContent='Thinking...';
+chat.push({r:'u',t});busy=1;
+if(V=='coach'){render();setTimeout(()=>window.scrollTo(0,document.body.scrollHeight),10);}
+const sb=$('#send-btn'); if(sb) sb.innerHTML='■';
+
+// Smart Keyword Detection
+let isAppQuery = /(my|plan|goal|sets|water|log|check|profile|history|streak)/i.test(t);
+let isWebQuery = /(price|latest|news|current|weather|who is|what is|where is|how much is|buy|research|information|details)/i.test(t);
+
+let msgs = ['Thinking...'];
+if (isAppQuery) msgs = ['Thinking...', 'Checking your profile...', 'Analyzing your data...', 'Preparing answer...'];
+else if (isWebQuery) msgs = ['Thinking...', 'Searching web...', 'Fetching sources...', 'Reading links...', 'Summarizing...'];
+else msgs = ['Thinking...', 'Finding out...', 'Structuring answer...'];
+
+let stepIdx = 0;
+let animInterval = setInterval(() => {
+    if (!busy) { clearInterval(animInterval); return; }
+    let el = document.getElementById('status-text');
+    if (el) {
+        stepIdx = Math.min(stepIdx + 1, msgs.length - 1);
+        el.textContent = msgs[stepIdx];
+    }
+}, 1000);
+
+let controller=new AbortController(); window.currentAbort=controller;
+let say='Could not reach the server. Please try again.',src=[],fu=[];
+
+try{
+await new Promise(r=>setTimeout(r,50));
+const r=await api('/api/chat',{uid:db.uid,text:t,ctx:ctx(),hist:chat.slice(-7,-1).map(m=>({r:m.r,t:m.t}))}, {signal: controller.signal});
+
+if(r.status==402){
+say='You have reached today\'s free limit. Unlock Pro for unlimited use.';vClose();
+sheet(`<h2>Daily limit reached</h2><p class="mu">Pro gives unlimited voice, chat and food scans for a one-time ₹${S.price}.</p><button class="btn" data-a="topay">See Pro</button><button class="ghost" data-a="x">Not now</button>`);
+}
+else{
+const j=await r.json();if(!r.ok)throw 0;
+busy=0;run(j.actions||[]);
+say=j.say||'Sorry, I could not generate a response. Please try again.';src=j.sources||[];fu=j.followups||[];
+}
+}catch(e){
+if(e.name==='AbortError')say='Stopped.';
+else say='Could not reach the server. Please try again.';
+} finally {
+clearInterval(animInterval);
+}
+
+window.currentAbort=null;
+busy=0; const sb2=$('#send-btn'); if(sb2) sb2.innerHTML='↑';
+chat.push({r:'b',t:say,src,fu});saveCurrentChat();
+$('#vs').textContent=say.replace(/\[\d\]/g,'');
+if(V=='coach')render();
+stt();speak(say)
+}
+const sendTxt=()=>{if(busy){if(window.currentAbort)window.currentAbort.abort();return;}const i=$('#ci'),t=i&&i.value.trim();if(t&&!busy){i.value='';ask(t)}};
+// ---- food scanner ----
+function scan(){const i=$d.createElement('input');i.type='file';i.accept='image/*';i.setAttribute('capture','environment');i.onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{const im=new Image();im.onload=()=>{const c=$d.createElement('canvas');c.width=800;c.height=Math.round(im.height*800/im.width);c.getContext('2d').drawImage(im,0,0,c.width,c.height);doScan(c.toDataURL('image/jpeg',.72))};im.onerror=()=>toast('Could not read that image');im.src=ev.target.result};r.readAsDataURL(f)};i.click()}
+async function doScan(img){toast('Analyzing your meal...');try{const r=await api('/api/scan',{uid:db.uid,image:img});if(r.status==402){sheet(`<h2>Daily limit reached</h2><p class="mu">Unlock Pro for unlimited scans.</p><button class="btn" data-a="topay">See Pro</button>`);return}
+const j=await r.json();if(!r.ok)throw 0;if(!j.food)return toast('No food found in that photo');stt();
+sheet(`<h2>${esc(j.food)}</h2><small>${esc(j.note||'One typical serving')} · estimate</small><div class="mac"><div><small>Protein</small><b>${j.protein} g</b></div><div><small>Carbs</small><b>${j.carbs} g</b></div><div><small>Fat</small><b>${j.fat} g</b></div></div><small style="margin-top:14px">Calories (edit if needed)</small><input id="sk" class="t" type="number" inputmode="numeric" value="${j.calories}"><button class="btn" data-a="savescan" data-n="${esc(j.food)}" data-p="${j.protein}" data-c="${j.carbs}" data-f="${j.fat}">Add to today</button><button class="ghost" data-a="x">Cancel</button>`)}catch(e){toast('Scan failed. Please try again.')}}
+// ---- plan / payment ----
+const stt=()=>window.auth.authFetch('/api/status').then(r=>r.json()).then(j=>{const was=S.active;S=j;if(j.active&&!was&&V=='pay')toast('Pro unlocked. Thank you!');if(['home','me','pay'].includes(V))render()}).catch(()=>{});
+function addSheet(){const ex=[...new Set(Object.values(db.days).flatMap(d=>(d.sets||[]).map(s=>s.e)).concat(LIB))];sheet(`<h2>Add a set</h2><input id="ae" class="t" list="el" placeholder="Exercise, e.g. Bench Press"><datalist id="el">${ex.map(e=>`<option value="${esc(e)}">`).join('')}</datalist><div class="g2" style="margin:0"><input id="aw" class="t" type="number" inputmode="decimal" placeholder="kg"><input id="ar" class="t" type="number" inputmode="numeric" placeholder="reps"></div><input id="an" class="t" type="number" inputmode="numeric" placeholder="sets" value="1"><button class="btn" data-a="saveset">Save</button>`)}
+function welcome(){$d.body.insertAdjacentHTML('beforeend','<div id="wl"><img src="icon.svg" width="60" height="60" alt="" style="border-radius:16px"><h1>Say it.<br>We track it.</h1><ul><li>Log workouts and meals by voice</li><li>Scan food with your camera</li><li>An AI coach that cites its sources</li></ul><input id="wn" class="t" maxlength="24" placeholder="What should we call you?"><button class="btn" data-a="begin">Get started</button><small>By continuing you agree to the Terms and Privacy Policy. AI coaching is general information, not medical advice.</small></div>')}
+$d.addEventListener('input',e=>{const t=e.target;if(t.id=='nm'){db.name=nm(t.value);save()}else if(t.id=='cg'){const c=cl(t.value,6000);if(c>=800){db.cal=c;save()}}else if(t.id=='utr')t.value=t.value.replace(/\D/g,'')});
+$d.addEventListener('keydown',e=>{if(e.key=='Enter'&&e.target.id=='ci')sendTxt()});
+$d.addEventListener('visibilitychange',()=>{if(!$d.hidden&&V=='pay')stt()});
+$d.addEventListener('click',e=>{const t=e.target.closest('[data-a]');if(!t)return;const x=t.dataset;({
+tab(){go(x.v)},topay(){closeSheet();go('pay')},mic:vOpen,vclose:vClose,theme(){db.theme=db.theme=='dark'?'light':'dark';applyTheme();save()},add:addSheet,x:closeSheet,scan,
+saveset(){ACT.log_set({exercise:$('#ae').value,weight:$('#aw').value,reps:$('#ar').value,sets:$('#an').value||1});save();closeSheet();render()},
+addmeal(){sheet(`<h2>Add a meal</h2><input id="mn" class="t" placeholder="What did you eat?" maxlength="60"><input id="mk" class="t" type="number" inputmode="numeric" placeholder="Calories"><button class="btn" data-a="savemeal">Save</button>`)},
+savemeal(){if(!$('#mn').value.trim())return toast('Enter what you ate');ACT.log_meal({name:$('#mn').value,calories:$('#mk').value});save();closeSheet();render()},
+savescan(){ACT.log_meal({name:x.n,calories:$('#sk').value,protein:x.p,carbs:x.c,fat:x.f});save();closeSheet();go('meals')},
+del(){window.showDialog({title:'Remove Set',message:'Remove this set?',onConfirm:()=>{day(key()).sets.splice(+x.i,1);save();render()}})},delm(){day(key()).meals.splice(+x.i,1);save();render()},
+wat(){ACT.water({n:+x.n});save();render()},slp(){window.showDialog({title:'Log Sleep',message:'Hours slept last night?',input:true,defaultValue:'7',onConfirm:(val)=>{const h=parseFloat(val);if(h>=0){ACT.sleep({hours:h});save();render()}}})},
+cal(){sd=x.d;render()},cmo(){cmo+=+x.n;render()},goal(){db.goal=+x.n;save();render()},lang(){db.lang=x.l;save();render()},voice(){db.voice=db.voice?0:1;save();render()},
+send:sendTxt,chip(){if(busy)return;if(V!='coach')go('coach');ask(x.q)},newchat(){newChatSession()},
+copy(){navigator.clipboard&&navigator.clipboard.writeText(S.upi).then(()=>toast('UPI ID copied'))},refresh(){stt();toast('Checking...')},
+async submitpay(){const utr=($('#utr').value||'').replace(/\D/g,''),payer=($('#payer').value||'').trim();if(utr.length!=12)return toast('Enter the 12 digit UTR');if(!payer)return toast('Enter the name on your UPI app');
+try{const r=await api('/api/pay',{uid:db.uid,utr,payer}),j=await r.json();if(!r.ok)return toast(j.error||'Could not submit');toast('Submitted. We will verify it soon.');stt()}catch(e){toast('Network problem. Try again.')}},
+recover(){window.showDialog({title:'Restore Pro',message:'Enter the 12 digit UTR',input:true,onConfirm:async(val)=>{const utr=(val||'').replace(/\D/g,'');if(utr.length!=12)return toast('Invalid UTR');try{const r=await api('/api/recover',{uid:db.uid,utr}),j=await r.json();toast(r.ok?'Pro restored on this phone':j.error||'Could not restore');stt()}catch(e){toast('Network problem')}}})},
+begin(){db.name=nm($('#wn').value)||'Champ';db.ob=1;save();$('#wl').remove();render()},
+exp(){const a=$d.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(db)],{type:'application/json'}));a.download='fitstreak-backup.json';a.click()},
+rst(){window.showDialog({title:'Delete All Data',message:'All data will be deleted. Continue?',onConfirm:()=>{db.days={};chat=[];db.chat=[];save();render()}})}})[x.a]?.()});
+if('serviceWorker'in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+applyTheme();if(!db.ob)welcome();setInterval(()=>{if(V=='home'&&!busy)render()},60000);const tb=new URLSearchParams(location.search).get('tab');if(tb)V={profile:'me',stats:'progress',ai:'coach'}[tb]||tb;if(!views[V])V='home';
+</script>
+<script>
+let isLogin = true;
+window.authToggle = () => {
+  isLogin = !isLogin;
+  document.getElementById('auth-btn-main').textContent = isLogin ? 'Login' : 'Sign Up';
+  document.getElementById('auth-toggle').textContent = isLogin ? "Don't have an account? Sign up" : "Already have an account? Login";
+};
+window.authBtnClick = async () => {
+  const email = document.getElementById('auth-email').value;
+  const pass = document.getElementById('auth-pass').value;
+  const btn = document.getElementById('auth-btn-main');
+  if(!email || !pass) return alert('Please enter email and password');
+  btn.textContent = 'Please wait...';
+  try {
+    if(isLogin) await window.auth.signInEmail(email, pass);
+    else await window.auth.signUpEmail(email, pass);
+  } catch(e) { alert(e.message || "Auth failed"); }
+  btn.textContent = isLogin ? 'Login' : 'Sign Up';
+};
+</script>
+<script>setTimeout(()=>{const sp=document.getElementById('splash');if(sp){sp.style.opacity='0';setTimeout(()=>sp.remove(),300)}},3000);</script>
+
+<div id="chat-sidebar" style="position:fixed;inset:0;z-index:100;display:none;">
+  <div style="position:absolute;inset:0;background:rgba(0,0,0,0.5);" onclick="document.getElementById('chat-sidebar').style.display='none'"></div>
+  <div style="position:absolute;top:0;left:0;bottom:0;width:280px;background:var(--s1);border-right:1px solid var(--bd);display:flex;flex-direction:column;padding:16px;box-shadow:4px 0 24px rgba(0,0,0,0.5);">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+      <h3>Chat History</h3>
+      <button onclick="document.getElementById('chat-sidebar').style.display='none'" style="font-size:24px;padding:4px;">&times;</button>
+    </div>
+    <button class="btn" onclick="newChatSession()" style="margin-bottom:16px;">+ New Chat</button>
+    <div id="chat-list" style="flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:8px;"></div>
+  </div>
+</div>
+</body>
+</html>

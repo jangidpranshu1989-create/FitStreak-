@@ -1,0 +1,6 @@
+.env
+fitstreak.db
+fitstreak.db-shm
+fitstreak.db-wal
+*.log
+__pycache__/
