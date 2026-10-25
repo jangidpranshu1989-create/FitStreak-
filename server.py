@@ -1,4 +1,5 @@
-import os,json,hmac,sqlite3,time,re,threading,html,urllib.request,urllib.error,urllib.parse
+import os,json,hmac,time
+import psycopg2,re,threading,html,urllib.request,urllib.error,urllib.parse
 from http.server import ThreadingHTTPServer,SimpleHTTPRequestHandler
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 if os.path.exists('.env'):
@@ -27,18 +28,41 @@ GROQ,TAV,ADMIN=E('GROQ_API_KEY',''),E('TAVILY_API_KEY',''),E('ADMIN_KEY','')
 FREE,PRO,PRICE=int(E('FREE_PER_DAY','10')),int(E('PRO_PER_DAY','150')),int(E('PRICE_INR','199'))
 UPI,UPN,SUP=E('UPI_ID',''),E('UPI_NAME',''),E('SUPPORT_CONTACT','')
 VISION=E('GROQ_VISION_MODEL','qwen/qwen3.6-27b');G='https://api.groq.com/openai/v1'
-D=sqlite3.connect('fitstreak.db',check_same_thread=False);L=threading.Lock()
-D.executescript('pragma journal_mode=wal;create table if not exists u(id text primary key,sub int default 0);create table if not exists n(id text,d text,c int,primary key(id,d));create table if not exists pay(utr text primary key,uid text,payer text,st text,ts int)')
+DB_URL=E('DATABASE_URL','')
+D = psycopg2.connect(DB_URL) if DB_URL else None
+L = threading.Lock()
+if D:
+    with D.cursor() as cur:
+        cur.execute('create table if not exists u(id text primary key,sub int default 0)')
+        cur.execute('create table if not exists n(id text,d text,c int,primary key(id,d))')
+        cur.execute('create table if not exists pay(utr text primary key,uid text,payer text,st text,ts int)')
+        D.commit()
+else:
+    print("⚠️ DATABASE_URL not found, database disabled.")
+
 def q(sql,a=()):
+    if not D: return []
+    sql = sql.replace('?', '%s')
+    sql = sql.replace('insert or ignore into n(id,d,c) select %s,d,c from n where id=%s', 'insert into n(id,d,c) select %s,d,c from n where id=%s on conflict do nothing')
+    sql = sql.replace('insert or ignore into u(id,sub) select %s,sub from u where id=%s', 'insert into u(id,sub) select %s,sub from u where id=%s on conflict do nothing')
     with L:
-        try:r=D.execute(sql,a).fetchall();D.commit();return r
-        except Exception:D.rollback();raise
+        try:
+            with D.cursor() as cur:
+                cur.execute(sql, a)
+                try: r = cur.fetchall()
+                except: r = []
+                D.commit()
+                return r
+        except Exception as e:
+            D.rollback()
+            print("DB Error", e, sql)
+            raise
 td=lambda:time.strftime('%Y-%m-%d')
 def active(u):
     r=q('select sub from u where id=?',(u,));return bool(r and r[0][0])
 def left(u):
     r=q('select c from n where id=? and d=?',(u,td()));return max(0,(PRO if active(u) else FREE)-(r[0][0] if r else 0))
-def use(u,d=1):q('insert into n values(?,?,?) on conflict(id,d) do update set c=max(0,c+?)',(u,td(),max(d,0),d))
+def use(u,d=1):q('insert into n(id,d,c) values(?,?,?) on conflict(id,d) do update set c=greatest(0,n.c+excluded.c)',(u,td(),max(d,0)))
 RL={}
 def rl(k,n,sec):
     now=time.time();a=[t for t in RL.get(k,[]) if now-t<sec]
