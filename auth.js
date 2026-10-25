@@ -1,4 +1,3 @@
-const BACKEND_URL = 'https://fitstreak-backend-eboo.onrender.com';
 const SUPABASE_URL = 'https://cggwuaqugvloamhchaxa.supabase.co';
 const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNnZ3d1YXF1Z3Zsb2FtaGNoYXhhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI3NjEwODAsImV4cCI6MjEwODMzNzA4MH0.lt6zI6PBdNjnTHUXxkYKVjVZY3uifefRS3ZWxEXlyS8';
 
@@ -101,7 +100,7 @@ window.auth = {
   },
 
   async authFetch(url, opts = {}) {
-    if (url.startsWith('/api')) url = BACKEND_URL + url;
+    
     const headers = { ...(opts.headers || {}), 'Authorization': 'Bearer ' + (this.session?.access_token || '') };
     return fetch(url, { ...opts, headers });
   }

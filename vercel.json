@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://fitstreak-backend-eboo.onrender.com/api/$1"
+    }
+  ]
+}
