@@ -133,7 +133,20 @@ if (db.chat && db.chat.length > 0) {
   db.chat = [];
 }
 window.db = db;
-const save=()=>{try{localStorage.setItem(K,JSON.stringify(db))}catch(e){}},esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])),pad=n=>String(n).padStart(2,'0'),
+let syncTimer;
+const save=()=>{
+  try{localStorage.setItem(K,JSON.stringify(db))}catch(e){}
+  clearTimeout(syncTimer);
+  syncTimer = setTimeout(() => {
+    if(window.db && window.db.uid && window.auth && window.auth.session) {
+      window.auth.authFetch('/api/save_data', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ data: window.db })
+      }).catch(()=>{});
+    }
+  }, 1000); // 1 second delay taaki baar baar API call na ho
+};,esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])),pad=n=>String(n).padStart(2,'0'),
 key=d=>{d=d||new Date();return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())},
 gd=k=>{const d=db.days[k]||{};return{sets:d.sets||[],meals:d.meals||[],water:d.water||0,sleep:d.sleep||0,type:d.type}},
 day=k=>{const d=db.days[k]||(db.days[k]={});d.sets=d.sets||[];d.meals=d.meals||[];d.water=d.water||0;d.sleep=d.sleep||0;return d},

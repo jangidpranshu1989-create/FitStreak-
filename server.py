@@ -36,6 +36,7 @@ if D:
         cur.execute('create table if not exists u(id text primary key,sub int default 0)')
         cur.execute('create table if not exists n(id text,d text,c int,primary key(id,d))')
         cur.execute('create table if not exists pay(utr text primary key,uid text,payer text,st text,ts int)')
+        cur.execute('create table if not exists ud(uid text primary key, data text)')
         D.commit()
 else:
     print("⚠️ DATABASE_URL not found, database disabled.")
@@ -200,6 +201,18 @@ def ask(b):
 def num(v,m):
     try:return max(0,min(m,round(float(v))))
     except Exception:return 0
+
+def get_user_data(b):
+    u=str(b.get('uid',''))
+    r=q('select data from ud where uid=?',(u,))
+    return 200, {'data': json.loads(r[0][0]) if r else {}}
+
+def save_user_data(b):
+    u=str(b.get('uid',''))
+    d=json.dumps(b.get('data',{}))
+    q('insert into ud(uid,data) values(?,?) on conflict(uid) do update set data=excluded.data',(u,d))
+    return 200, {'ok':1}
+
 def scan(b):
     u=str(b.get('uid',''))[:64];img=str(b.get('image',''))
     if not u or not img.startswith('data:image/') or len(img)>2500000:return 400,{'error':'bad image'}
@@ -297,7 +310,7 @@ class H(SimpleHTTPRequestHandler):
         except Exception:return self.js(400,{})
         
         # --- CHANGED: ROUTES LOCK ---
-        if p in ('/api/chat','/api/scan','/api/pay','/api/recover','/api/migrate'):
+        if p in ('/api/chat','/api/scan','/api/pay','/api/recover','/api/migrate','/api/get_data','/api/save_data'):
             uid=verify(self)
             if not uid:return self.js(401,{'error':'login required'})
             if p=='/api/migrate':
@@ -314,6 +327,8 @@ class H(SimpleHTTPRequestHandler):
         # --------------------------
         
         if p=='/api/chat':c,o=ask(b)
+        elif p=='/api/get_data':c,o=get_user_data(b)
+        elif p=='/api/save_data':c,o=save_user_data(b)
         elif p=='/api/scan':c,o=scan(b)
         elif p=='/api/pay':c,o=pay(b,self.ip())
         elif p=='/api/recover':c,o=recover(b,self.ip())
